@@ -1,0 +1,16 @@
+{
+  "name": "project-6-front-end-fisheye",
+  "version": "1.0.0",
+  "description": "Project 6",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Wilo",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "eslint": "^9.20.1",
+    "globals": "^16.0.0"
+  }
+}
