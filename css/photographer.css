@@ -2,10 +2,52 @@
     display: none;
 }
 
+body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 90px;
+}
+
+h1 {
+    color: #D3573C;
+    font-size: 64px;
+}
+
+h2 {
+    color: #901C1C;
+    font-size: 24px;
+}
+
+.logo {
+    height: 50px;
+    margin-left: 100px;
+}
+
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
     margin: 0 100px;
+}
+
+.photograph-header section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 50px;
+    align-items: center;
+}
+
+.presentation {
+    display: grid;
+    gap: 20px;
 }
 
 .contact_button {
@@ -19,6 +61,13 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20px;
+}
+
+.profile_picture img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
 }
 
 .modal {
