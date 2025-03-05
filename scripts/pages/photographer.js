@@ -1,4 +1,3 @@
-//Mettre le code JavaScript lié à la page photographer.html
 document.addEventListener("DOMContentLoaded", function () {
 
     async function init() {
@@ -11,6 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const media = sortMedia(id, datas.media);
         console.log(media);
         displayData(photographer);
+        displayMedia(media, photographer)
     }
 
     init();
@@ -47,40 +47,43 @@ document.addEventListener("DOMContentLoaded", function () {
         return photographers.find(photographer => photographer.id == id);
     }
 
-
+    /**
+     * Sort the photographer by ID.
+     * @param {string} id - The ID of the photographer.
+     * @param {object} media - The list of media.
+     * @returns {object} The medias of the photographer.
+     */
     function sortMedia(photographerId, media) {
         return media.filter(media => media.photographerId == photographerId);
     }
 
-    function photographerTemplate(data) {
-        const { name, portrait, city, country, tagline } = data;
-
-        const picture = `assets/photos/Sample Photos/Photographers ID Photos/${portrait}`;
-        function getUserCardDOM() {
-            const section = document.createElement('section');
-            section.insertAdjacentHTML("beforeend", `
-            <div class="presentation">
-                <h1>${name}</h1>
-                <h2>${city}, ${country}</h2>
-                <p class="tagline">${tagline}</p>
-            </div>
-            <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-            <div class="profile_picture">
-                <img src="${picture}" alt="photo de profile de ${name}"/>
-            </div>
-        `);
-            return section;
-        }
-        return { name, picture, getUserCardDOM }
-    }
-
-
     async function displayData(photographer) {
         const photographersSection = document.querySelector(".photograph-header");
 
-        const photographerModel = photographerTemplate(photographer);
+        const photographerModel = photographerProfileTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     }
+
+    async function displayMedia(media, photographer) {
+
+        const mediaContainer = document.querySelector(".photograph-medias");
+
+        media.forEach(media => {
+
+            if (media.image) {
+                let imageMedia = new ImageMedia(media, photographer);
+                let article = imageMedia.createMedia(); // createMedia
+                console.log(article);
+                mediaContainer.appendChild(article);
+            } else {
+                let videoMedia = new VideoMedia(media, photographer);
+                let article = videoMedia.createMedia();
+                console.log(article);
+                mediaContainer.appendChild(article);
+            }
+        });
+    }
 });
+
 
