@@ -98,11 +98,21 @@ h2 {
     border-radius: 5px;
 }
 
-.mediaDescription {
+.descriptionPicture {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+
+.likes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.heart {
+    cursor: pointer;
 }
 
 .modal {
