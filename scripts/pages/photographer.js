@@ -59,7 +59,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function displayData(photographer) {
         const photographersSection = document.querySelector(".photograph-header");
-
         const photographerModel = photographerProfileTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
@@ -83,6 +82,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 mediaContainer.appendChild(article);
             }
         });
+    }
+
+    async function openMediasModal(id) {
+
     }
 });
 

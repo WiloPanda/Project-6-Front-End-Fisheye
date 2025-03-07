@@ -2,17 +2,19 @@
 <html>
 
 <head>
+  <meta charset="utf-8">
+  <!-- Styles -->
   <link href="css/reset.css" rel="stylesheet" type="text/css" />
   <link href="css/photographer.css" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
+
+  <!-- Scripts -->
   <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
   <script src="/scripts/pages/photographer.js" defer></script>
   <script src="/scripts/models/MainMedia.js" defer></script>
-  <script src="/scripts/models/ImageMedia.js" defer></script>
-  <script src="/scripts/models/VideoMedia.js" defer></script>
-  <script src="/scripts/utils/contactForm.js" defer></script>
-  <meta charset="utf-8">
+  <script src="/scripts/utils/likes.js" defer></script>
+
   <link rel="icon" type="image/png" href="assets/favicon.png">
-  <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <title>Fisheye - photographe</title>
 </head>
 
@@ -24,24 +26,28 @@
     <section class="photograph-header">
 
     </section>
+
+    <div class="filter_section">
+      <p class="filter_title">Filtres</p>
+      <ul class="filters">
+        <li>
+          <button type="button" class="filter_popularity">Popularité</button>
+        </li>
+        <li>
+          <button type="button" class="filter_date">Date</button>
+        </li>
+        <li>
+          <button type="button" class="filter_title">Titre</button>
+        </li>
+      </ul>
+    </div>
+
     <section class="photograph-medias">
 
     </section>
   </main>
   <div id="contact_modal">
-    <div class="modal">
-      <header>
-        <h2>Contactez-moi</h2>
-        <img src="assets/icons/close.svg" onclick="closeModal()" />
-      </header>
-      <form>
-        <div>
-          <label>Prénom</label>
-          <input />
-        </div>
-        <button class="contact_button">Envoyer</button>
-      </form>
-    </div>
+
   </div>
 </body>
 

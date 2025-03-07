@@ -1,10 +1,18 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.4);
 }
 
 body {
     font-family: "DM Sans", sans-serif;
-    margin: 0;
+    margin: 0px;
 }
 
 header {
@@ -23,6 +31,11 @@ h1 {
 h2 {
     color: #901C1C;
     font-size: 24px;
+}
+
+h3 {
+    color: black;
+    font-size: 64px;
 }
 
 .logo {
@@ -118,18 +131,22 @@ h2 {
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 40%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    margin-top: 50px;
 }
 
 .modal header {
     justify-content: space-between;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 40px;
 }
 
 .modal header img {
@@ -152,6 +169,7 @@ form {
 form label {
     color: #312E2E;
     font-size: 36px;
+    padding: 5px 0px 5px 0px;
 }
 
 form div {
@@ -162,9 +180,15 @@ form div {
     margin-bottom: 26px;
 }
 
-form input {
+form input,
+textarea {
     width: 100%;
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 25px;
+}
+
+form textarea {
+    height: 170px;
 }
