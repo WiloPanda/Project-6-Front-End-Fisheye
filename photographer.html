@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
 
   <!-- Scripts -->
-  <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
   <script src="/scripts/pages/photographer.js" defer></script>
+  <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
   <script src="/scripts/models/MainMedia.js" defer></script>
   <script src="/scripts/utils/likes.js" defer></script>
 
@@ -47,7 +47,25 @@
     </section>
   </main>
   <div id="contact_modal">
-
+    <div class="modal">
+      <header>
+        <h1 class="modal_title">Contactez-moi</h1>
+        <img src="assets/icons/close.svg" onclick="closeModal()" />
+      </header>
+      <form onsubmit="sendForm(event)">
+        <div>
+          <label>Prenom</label>
+          <input type="text" name="firstname" required />
+          <label>Nom</label>
+          <input type="text" name="lastname" required />
+          <label>Email</label>
+          <input type="email" name="email" required />
+          <label>Message</label>
+          <textarea name="message" required cols="70" rows="10"></textarea>
+        </div>
+        <button type="submit" class="contact_button" onclick="sendForm(event)">Envoyer</button>
+      </form>
+    </div>
   </div>
 </body>
 

@@ -12,7 +12,7 @@
 
 body {
     font-family: "DM Sans", sans-serif;
-    margin: 0px;
+    margin: 0px 280px;
 }
 
 header {
@@ -20,7 +20,7 @@ header {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 90px;
+    height: 120px;
 }
 
 h1 {
@@ -33,29 +33,28 @@ h2 {
     font-size: 24px;
 }
 
-h3 {
+.modal_title {
     color: black;
-    font-size: 64px;
 }
 
 .logo {
     height: 50px;
-    margin-left: 100px;
 }
 
 .photograph-header {
     background-color: #FAFAFA;
     height: 300px;
-    margin: 0 100px;
+    border-radius: 5px;
 }
 
-.photograph-header section {
+.profile {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-top: 20px;
     padding: 50px;
     align-items: center;
+    margin: 0px;
 }
 
 .presentation {
@@ -86,14 +85,12 @@ h3 {
 .photograph-medias {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    width: 80%;
-    margin: auto;
+    gap: 30px 60px;
     padding-top: 58px;
 }
 
 .media {
-    width: 350px;
+    width: 100%;
     height: 351px;
 }
 
@@ -131,14 +128,15 @@ h3 {
 .modal {
     border-radius: 5px;
     background-color: #DB8876;
-    width: 40%;
+    width: 35%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 10px;
+    gap: 20px;
 }
 
 .modal header {
@@ -147,6 +145,7 @@ h3 {
     display: flex;
     flex-direction: row;
     padding-bottom: 40px;
+    align-items: baseline;
 }
 
 .modal header img {
@@ -177,7 +176,6 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
 }
 
 form input,
