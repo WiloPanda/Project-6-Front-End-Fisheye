@@ -30,11 +30,13 @@ a {
     color: #901C1C;
 }
 
+/* Header */
 .logo {
     height: 50px;
     margin-left: 100px;
 }
 
+/* PHOTOGRAPHER */
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

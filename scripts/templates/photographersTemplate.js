@@ -1,3 +1,8 @@
+/**
+ * @function [<photographersTemplate>]
+ * @param {Object} data - Data of the photographer.
+ * @returns {Object} - Return the name, picture and the DOM element of the photographer.
+ */
 function photographersTemplate(data) {
     const { name, portrait, id, city, country, tagline, price } = data;
 

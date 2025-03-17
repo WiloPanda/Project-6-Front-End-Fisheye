@@ -12,7 +12,6 @@
   <script src="/scripts/pages/photographer.js" defer></script>
   <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
   <script src="/scripts/models/MainMedia.js" defer></script>
-  <script src="/scripts/utils/likes.js" defer></script>
 
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <title>Fisheye - photographe</title>
@@ -22,28 +21,31 @@
   <header>
     <img src="assets/images/logo.png" class="logo" />
   </header>
-  <main id="main">
-    <section class="photograph-header">
 
+  <main id="main">
+    <section class="photographe_header">
     </section>
 
     <div class="filter_section">
-      <p class="filter_title">Filtres</p>
-      <ul class="filters">
-        <li>
-          <button type="button" class="filter_popularity">Popularité</button>
-        </li>
-        <li>
-          <button type="button" class="filter_date">Date</button>
-        </li>
-        <li>
-          <button type="button" class="filter_title">Titre</button>
-        </li>
-      </ul>
+      <label class="label" for="select">Trier par</label>
+      <div class="select_container">
+        <div id="select_container-icon">
+          <img src="/assets/icons/dropdown.png" alt="icône flèche permettant de déplier le filtre dropdown"
+            tabindex="0" />
+        </div>
+        <button id="filter" type="button" role="button" aria-haspopup="listbox" tabindex="0"
+          aria-expanded="false"></button>
+        <div id="dropdown_menu">
+          <ul id="dropdown_menu_hidden">
+            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Popularité">Popularité</li>
+            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Date">Date</li>
+            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Titre">Titre</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <section class="photograph-medias">
-
+    <section class="photographe_medias">
     </section>
   </main>
   <div id="contact_modal">

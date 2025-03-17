@@ -1,23 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    /**
+     * Main function calling all the other functions.
+     * @function [<init>]
+     */
     async function init() {
         const id = getId();
-        console.log(id);
         const datas = await getData();
-        console.log(datas);
         const photographer = sortPhotographer(id, datas.photographers);
-        console.log(photographer);
         const media = sortMedia(id, datas.media);
-        console.log(media);
         displayData(photographer);
         displayMedia(media, photographer)
+        sortFilter(media, photographer);
     }
 
     init();
 
     /**
      * Get the ID of the photographer from the URL.
-     * @returns {string} La valeur du paramètre "id".
+     * @function [<getId>]
+     * @returns {string} - Value of "id".
      */
     function getId() {
         const urlParams = new URLSearchParams(window.location.search);
@@ -27,7 +29,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /**
      * Get data from the JSON file.
-     * @returns {object} Les données des photographes.
+     * @function [<getData>]
+     * @returns {object} Data of the photographers.
      */
     function getData() {
         return fetch("data/photographers.json")
@@ -39,16 +42,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /**
      * Sort the photographer by ID.
+     * @function [<sortPhotographer>]
      * @param {string} id - The ID of the photographer.
      * @param {object} photographers - The list of photographers.
-     * @returns {object} The photographer.
+     * @returns {object} The data of the photographer.
      */
     function sortPhotographer(id, photographers) {
         return photographers.find(photographer => photographer.id == id);
     }
 
     /**
-     * Sort the photographer by ID.
+     * Sort the medias by the photographe ID.
+     * @function [<sortMedia>]
      * @param {string} id - The ID of the photographer.
      * @param {object} media - The list of media.
      * @returns {object} The medias of the photographer.
@@ -57,22 +62,34 @@ document.addEventListener("DOMContentLoaded", function () {
         return media.filter(media => media.photographerId == photographerId);
     }
 
+    /**
+     * Display the photographer's data in the header section.
+     * @function [<displayData>]
+     * @param {object} photographer - The data of the photographer.
+     */
     async function displayData(photographer) {
-        const photographersSection = document.querySelector(".photograph-header");
+        const photographersSection = document.querySelector(".photographe_header");
         const photographerModel = photographerProfileTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     }
 
+    /**
+     * Display the Images and Videos of the photographer in the section photographe_medias
+     * Call the fonction calculateTotalLikes.
+     * @function [<displayMedia>]
+     * @param {object} media - The data of the medias of the photographer.
+     * @param {object} photographer - The data of the photographer.
+     */
     async function displayMedia(media, photographer) {
 
-        const mediaContainer = document.querySelector(".photograph-medias");
+        const mediaContainer = document.querySelector(".photographe_medias");
 
         media.forEach(media => {
 
             if (media.image) {
                 let imageMedia = new ImageMedia(media, photographer);
-                let article = imageMedia.createMedia(); // createMedia
+                let article = imageMedia.createMedia();
                 console.log(article);
                 mediaContainer.appendChild(article);
             } else {
@@ -82,11 +99,61 @@ document.addEventListener("DOMContentLoaded", function () {
                 mediaContainer.appendChild(article);
             }
         });
+
+        let totalLikes = calculateTotalLikes(media);
+        document.querySelector(".totalLikes").textContent = totalLikes;
     }
 
-    async function openMediasModal(id) {
 
+    /**
+     * Calculate the total of likes of the medias.
+     * @function [<calculateTotalLikes>]
+     * @param {object} media - The data of the medias of the photographer.
+     * @returns {string} The total of likes of the medias.
+     */
+    function calculateTotalLikes(media) {
+        let totalLikes = 0;
+        media.forEach(media => {
+            totalLikes += media.likes;
+        });
+        return totalLikes;
     }
+
+    /**
+     * Sort the medias by popularity, date or title.
+     * @function [<sortFilter>]
+     * @param {object} media - The data of the medias of the photographer.
+     * @param {object} photographer - The data of the photographer.
+     * @returns {object} The medias sorted
+     */
+    function sortFilter(mediaOrdonnees, photographer) {
+        const options = document.querySelectorAll(".dropdown_options");
+
+        options.forEach(option => {
+            option.addEventListener("click", (e) => {
+                console.log("Clicked option:", e.target.textContent);
+
+                mediaOrdonnees.sort((a, b) => {
+                    switch (e.target.textContent.trim()) {
+                        case "Popularité":
+                            return b.likes - a.likes;
+                        case "Date":
+                            return new Date(b.date) - new Date(a.date);
+                        case "Titre":
+                            return a.title.localeCompare(b.title);
+                        default:
+                            return 0;
+                    }
+                });
+
+                document.querySelector(".photographe_medias").innerHTML = "";
+                console.log("Médias triés :", mediaOrdonnees);
+                displayMedia(mediaOrdonnees, photographer);
+            });
+        });
+    }
+
+
 });
 
 

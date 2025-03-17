@@ -1,4 +1,9 @@
-
+/**
+ * Create a template for the photographer profile.
+ * @function [<photographerProfileTemplate>]
+ * @param {object} data - Data of the photographer.
+ * @returns {object} An object containing the photographer's name, profile picture, and a method to generate the profile DOM.
+ */
 function photographerProfileTemplate(data) {
     const { name, portrait, city, country, tagline } = data;
 
@@ -24,23 +29,41 @@ function photographerProfileTemplate(data) {
         formName.insertAdjacentHTML("beforeend", `<br>${name}`);
         return div;
     }
+
     return { name, picture, getUserCardDOM };
 }
 
+/**
+ * Display the contact form.
+ * @function [<displayModal>]
+ */
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 }
 
+/**
+ * Close the contact form.
+ * @function [<closeModal>]
+ */
 function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
 
+/**
+ * Send the form.
+ * @function [<sendForm>]
+ * @param {object} event - The event.
+ */
 function sendForm(event) {
     event.preventDefault();
-    let inputForm = document.querySelectorAll("input");
-    inputForm.forEach(input => {
-        console.log(input.value)
-    })
+    let inputForm = document.querySelectorAll("form");
+    let objectcontacform = {
+        firstName: inputForm[0].elements[0].value,
+        name: inputForm[0].elements[1].value,
+        email: inputForm[0].elements[2].value,
+        message: inputForm[0].elements[3].value,
+    };
+    console.log(objectcontacform);
 }

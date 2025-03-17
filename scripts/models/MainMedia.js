@@ -1,24 +1,24 @@
 class MainMedia {
-
     /** 
-        * Utilisation d'un constructor pour la création d'un nouveau média.
+        * Use a constructor to create a new media object.
         * @constructor
-        * @param {Object} media - Object contenant les informations du média.
-        * @param {string} data.title - Le titre du média.
-        * @param {number} data.likes - Le nombre de likes du média.
-        * @param {number} data.id - l'ID unique du média.
+        * @param {Object} media - Data of the media.
+        * @param {Object} photographer - Data of the photographer.
     */
-    constructor(media) {
+    constructor(media, photographer) {
         const { date, price, id, likes, title } = media;
+        this.photographer = photographer;
         this.title = title;
         this.likes = likes;
         this.id = id;
+        this.date = date;
+        this.price = price;
     }
 
     /**
-        * Initialisation de la fonction createMedia, permettant de créer un média dans le DOM HTML.
+        * Creates an HTML media element and adds it to the DOM.
         * @function [<createMedia>]
-        * @return {HTMLElement} - Retourne un élément HTML <article> qui représente le média.
+        * @returns {HTMLElement} - Returns an <article> element representing the media.
     */
     createMedia() {
         const article = document.createElement('article');
@@ -26,99 +26,111 @@ class MainMedia {
         article.insertAdjacentHTML(
             "beforeend",
             `
-                <div class ="descriptionPicture">
+                <div class="descriptionPicture">
                     <p tabindex="0">${this.title}</p>
-                    <div class="likes"><p tabindex="0">${this.likes}</p><img tabindex="0" class="heart" src="assets/icons/Heart.png" alt="icône coeur permettant de liker un média"/></div>
+                    <div class="likes"><p tabindex="0">${this.likes}</p><img tabindex="0" class="heart" src="assets/icons/Heart.png" alt="heart icon to like a media"/></div>
                 </div>  
             `
-        )
+        );
 
-        let likeHeart = article.getElementsByClassName('heart')[0]
-        likeHeart.addEventListener('click', function incLike(e) { // Ajout de l'évènement au clique sur un coeur permettant de liker un média.
+        if (!document.querySelector('aside')) {
+            const sectionMedia = document.querySelector('.photographe_medias');
+            sectionMedia.insertAdjacentHTML("afterend",
+                `
+        <aside>
+            <p class="photographer_Likes">
+                <span class="totalLikes">${this.likes}</span>
+                <img class="fas fa-heart" src="assets/icons/Heart.png" aria-hidden="true" alt="heart icon showing total likes count"></span>
+            </p>
+            <span>${this.photographer.price}€ / day</span>
+        </aside>
+        `
+            );
+        }
+
+        let likeHeart = article.getElementsByClassName('heart')[0];
+        likeHeart.addEventListener('click', function incLike(e) {
 
             likeHeart.classList.add('heartliked');
-            let likeValue = parseInt(e.target.parentElement.textContent)
-            let intValue = e.target.parentElement.querySelector('p')
-            let totalLikes = document.getElementById("totalLikes")
+            let likeValue = parseInt(e.target.parentElement.textContent);
+            let intValue = e.target.parentElement.querySelector('p');
+            let totalLikes = document.querySelector(".totalLikes");
 
             intValue.innerHTML = likeValue + 1;
             totalLikes.innerHTML = parseInt(totalLikes.textContent) + 1;
 
-            likeHeart.removeEventListener('click', incLike) // Retrait de l'évènement une fois un like effectué.
-        })
+            likeHeart.removeEventListener('click', incLike); // Remove event after click to prevent multiple increments
+        });
 
-        likeHeart.addEventListener('keydown', (e) => { // Ajout de l'évènement à l'appui sur la touche "entrée" sur un coeur permettant de liker un média.
+        likeHeart.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 likeHeart.click();
             }
-        })
-        return (article);
+        });
+        return article;
     }
 }
 
 class ImageMedia extends MainMedia {
-
     /** 
-        * Utilisation d'un constructor pour la création d'un nouveau média de type video.
+        * Constructor for creating a new image media.
         * @constructor
-        * @function super - Récupération des datas de la class Medias grâce à l'utilisation de super().
-        * @param {string} `assets/photos/Sample Photos/${photographer.name}/${media.image}`- Le chemin de l'image correspondant au média.
+        * @param {Object} media - Data of the media.
+        * @param {Object} photographer - Data of the photographer.
     */
     constructor(media, photographer) {
-        super(media, photographer)
+        super(media, photographer);
         this.image = `assets/photos/Sample Photos/${photographer.name}/${media.image}`;
     }
 
     /**
-        * Initialisation de la fonction createMedia, permettant de créer un média de type image dans le DOM à la suite du HTML de base d'un média.
+        * Creates an image media element and adds it to the DOM.
         * @function [<createMedia>]
         * @override
-        * @return {HTMLElement} - Retourne un élément HTML <article> spécifique qui représente le média de type image.
+        * @returns {HTMLElement} - Returns an <article> element representing the image media.
     */
     createMedia() {
-        const article = super.createMedia()
+        const article = super.createMedia();
         article.insertAdjacentHTML(
             "afterbegin",
             `
             <img src="${this.image}" alt="${this.title}" class="mediaImage" tabindex="0"/>
             `
-        )
+        );
 
-        let imageModal = article.querySelectorAll('.mediaImage')
+        let imageModal = article.querySelectorAll('.mediaImage');
         imageModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une image permettant l'ouverture de la modale carroussel.
-            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une image permettant l'ouverture de la modale carroussel.
+            element.addEventListener('click', () => openMediasModal(this.id));
+            element.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    openMediasModal(this.id)
+                    openMediasModal(this.id);
                 }
-            })
-        })
-
-        return (article);
+            });
+        });
+        return article;
     }
 }
 
 class VideoMedia extends MainMedia {
-
     /** 
-        * Utilisation d'un constructor pour la création d'un nouveau média de type video.
+        * Constructor for creating a new video media.
         * @constructor
-        * @function super - Récupération des datas de la class Medias grâce à l'utilisation de super().
-        * @param {string} `assets/photos/Sample Photos/${photographer.name}/${media.video}` - Le chemin de la vidéo correspondant au média.
+        * @param {Object} media - Data of the media.
+        * @param {Object} photographer - Data of the photographer.
     */
     constructor(media, photographer) {
-        super(media, photographer)
+        super(media, photographer);
         this.film = `assets/photos/Sample Photos/${photographer.name}/${media.video}`;
     }
 
     /**
-        * Initialisation de la fonction createMedia, permettant de créer un média de type video dans le DOM à la suite du HTML de base d'un média.
+        * Creates a video media element and adds it to the DOM.
         * @function [<createMedia>]
         * @override
-        * @return {HTMLElement} - Retourne un élément HTML <article> spécifique qui représente le média de type video.
+        * @returns {HTMLElement} - Returns an <article> element representing the video media.
     */
     createMedia() {
-        const article = super.createMedia()
+        const article = super.createMedia();
         article.insertAdjacentHTML(
             "afterbegin",
             `
@@ -126,39 +138,40 @@ class VideoMedia extends MainMedia {
             <source src="${this.film}" type=video/mp4>
             </video>
             `
-        )
+        );
 
-        let imageModal = article.querySelectorAll('.mediaVideo')
-        imageModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une vidéo permettant l'ouverture de la modale carroussel.
-            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une vidéo permettant l'ouverture de la modale carroussel.
+        let videoModal = article.querySelectorAll('.mediaVideo');
+        videoModal.forEach(element => {
+            element.addEventListener('click', () => openMediasModal(this.id));
+            element.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
-                    openMediasModal(this.id)
+                    openMediasModal(this.id);
                 }
-            })
-        })
+            });
+        });
 
-        return (article);
+        return article;
     }
+
     /**
-        * Initialisation de la fonction createMediaModal, permettant de créer un média de type video dans le DOM à l'intérieur d'une div représentant une modale.
+        * Creates a video media element for the modal.
         * @function [<createMediaModal>]
-        * @return {HTMLElement} - Retourne un élément HTML <div> spécifique qui représente le média de type video dans une modale.
+        * @returns {HTMLElement} - Returns a <div> element representing the video media in the modal.
     */
     createMediaModal() {
-        const article = document.createElement('div')
-        article.setAttribute('id', 'mediaModal_' + this.id)
-        article.setAttribute('class', 'mediaModal')
+        const article = document.createElement('div');
+        article.setAttribute('id', 'mediaModal_' + this.id);
+        article.setAttribute('class', 'mediaModal');
         article.insertAdjacentHTML(
             "beforeend",
             `
-            <video width="350" height="300" class="video" alt="${this.title}" tabindex="0" controls auto>
-            <source src="${this.video}" type=video/mp4>
+            <video width="350" height="300" class="video" alt="${this.title}" tabindex="0" controls>
+            <source src="${this.film}" type=video/mp4>
             </video>
             <p>${this.title}</p> 
             `
-        )
+        );
 
-        return (article)
+        return article;
     }
 }
