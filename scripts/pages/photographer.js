@@ -90,12 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
             if (media.image) {
                 let imageMedia = new ImageMedia(media, photographer);
                 let article = imageMedia.createMedia();
-                console.log(article);
                 mediaContainer.appendChild(article);
             } else {
                 let videoMedia = new VideoMedia(media, photographer);
                 let article = videoMedia.createMedia();
-                console.log(article);
                 mediaContainer.appendChild(article);
             }
         });
@@ -131,7 +129,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         options.forEach(option => {
             option.addEventListener("click", (e) => {
-                console.log("Clicked option:", e.target.textContent);
 
                 mediaOrdonnees.sort((a, b) => {
                     switch (e.target.textContent.trim()) {
@@ -147,13 +144,59 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
 
                 document.querySelector(".photographe_medias").innerHTML = "";
-                console.log("Médias triés :", mediaOrdonnees);
                 displayMedia(mediaOrdonnees, photographer);
             });
         });
     }
 
+    const currentFilter = document.getElementById('current_filter');
+    const allFilters = Array.from(document.querySelectorAll('.dropdown_options'));
+    const dropdownButton = document.getElementById('dropdown_button');
+    const dropdownMenu = document.getElementById('dropdown_menu');
 
+    let filterAlreadySelected = allFilters.find(filter => filter.textContent.trim() === currentFilter.textContent);
+    console.log(filterAlreadySelected);
+    if (filterAlreadySelected) {
+        filterAlreadySelected.style.display = 'none';
+    }
+
+    // Ouvrir/fermer le menu au clic sur le bouton
+    dropdownButton.addEventListener("click", function () {
+        const isExpanded = dropdownButton.getAttribute("aria-expanded") === "true";
+        dropdownButton.setAttribute("aria-expanded", !isExpanded);
+        dropdownMenu.style.display = isExpanded ? "none" : "block";
+    });
+
+    // Fermer le menu si on clique à côté
+    document.addEventListener("click", function (event) {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownMenu.style.display = "none";
+        }
+    });
+
+    // Ajouter l'événement sur les options du menu
+    allFilters.forEach(filter => {
+        filter.addEventListener('click', () => {
+            // Mettre à jour le texte du bouton avec le texte de l'option sélectionnée
+            currentFilter.textContent = filter.textContent;
+
+            // Masquer l'option précédemment sélectionnée et la réafficher dans la liste
+            if (filterAlreadySelected) {
+                filterAlreadySelected.style.display = 'block';
+            }
+
+            // Masquer la nouvelle option sélectionnée
+            filter.style.display = 'none';
+
+            // Mettre à jour la référence de la dernière option sélectionnée
+            filterAlreadySelected = filter;
+
+            // Fermer le menu après la sélection
+            dropdownButton.setAttribute("aria-expanded", "false");
+            dropdownMenu.style.display = "none";
+        });
+    });
 });
 
 

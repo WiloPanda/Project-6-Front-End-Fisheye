@@ -29,17 +29,18 @@
     <div class="filter_section">
       <label class="label" for="select">Trier par</label>
       <div class="select_container">
-        <div id="select_container-icon">
+        <button id="dropdown_button" class="btn_drop" type="button" role="button" aria-haspopup="listbox"
+          aria-expanded="false" aria-controls="dropdown_menu" aria-label="Sort by">
+          <span id="current_filter">Popularité</span>
           <img src="/assets/icons/dropdown.png" alt="icône flèche permettant de déplier le filtre dropdown"
             tabindex="0" />
-        </div>
-        <button id="filter" type="button" role="button" aria-haspopup="listbox" tabindex="0"
-          aria-expanded="false"></button>
+        </button>
         <div id="dropdown_menu">
           <ul id="dropdown_menu_hidden">
-            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Popularité">Popularité</li>
-            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Date">Date</li>
-            <li class="dropdown_options" tabindex="0" role="listbox" activedescendant="Titre">Titre</li>
+            <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" value="Popularité">Popularité
+            </li>
+            <li class="dropdown_options" tabindex="0" role="option" value="Date">Date</li>
+            <li class="dropdown_options" tabindex="0" role="option" value="Titre">Titre</li>
           </ul>
         </div>
       </div>
