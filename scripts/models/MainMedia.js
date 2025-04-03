@@ -186,7 +186,7 @@ class VideoMedia extends MainMedia {
         article.insertAdjacentHTML(
             "beforeend",
             `
-            <video width="350" height="300" class="video" alt="${this.title}" tabindex="0" controls auto>
+            <video class="video" alt="${this.title}" tabindex="0" controls auto>
             <source src="${this.video}" type=video/mp4>
             </video>
             <p>${this.title}</p> 

@@ -329,23 +329,102 @@ form textarea {
     height: 170px;
 }
 
-/* LIGHTBOX 
-.modal-content {
-    display: none;
+/* LIGHTBOX */ 
+/* Styles pour la modale de carrousel */
+#medias_modal {
     position: fixed;
-    z-index: 1;
-    left: 0;
     top: 0;
-    height: 100%;
+    left: 0;
     width: 100%;
-    overflow: auto;
-    background-color: rgba(196, 196, 196, 0.4);
-}*/
-
-.mediaModal {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10;
     display: none;
-}
-
-.mediaModal.active {
+  }
+  
+  .modal_childrens {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    height: 85%;
+  }
+  
+  #carousel {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    background-color: transparent;
+  }
+  
+  /* Styles pour les médias dans le carrousel */
+  .mediaModal {
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+    background-color: transparent;
+  }
+  
+  .mediaModal.active {
     display: block;
-}
+  }
+  
+  .mediaModal img, .mediaModal video {
+    max-width: 100%;
+    max-height: 80vh; /* Limite la hauteur à 80% de la hauteur de la fenêtre */
+    object-fit: contain;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+  }
+  
+  /* Styles pour les boutons de navigation */
+  #left-side, #right-side {
+    display: flex;
+    align-items: center;
+    z-index: 11;
+  }
+  
+  .previous-button, .next-button {
+    cursor: pointer;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .close-button img {
+    width: 24px;
+    height: 24px;
+    filter: brightness(0) invert(1); /* Pour rendre l'icône de fermeture blanche */
+  }
+  
+  /* Style pour le titre sous l'image */
+  .media-title {
+    color: #fff;
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 500;
+    text-align: left;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+  }
