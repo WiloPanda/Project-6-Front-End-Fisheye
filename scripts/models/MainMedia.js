@@ -17,7 +17,7 @@ class MainMedia {
 
     /**
         * Creates an HTML media element and adds it to the DOM.
-        * @function [<createMedia>]
+        * @method [<createMedia>]
         * @returns {HTMLElement} - Returns an <article> element representing the media.
     */
     createMedia() {
@@ -85,7 +85,7 @@ class ImageMedia extends MainMedia {
 
     /**
         * Creates an image media element and adds it to the DOM.
-        * @function [<createMedia>]
+        * @method [<createMedia>]
         * @override
         * @returns {HTMLElement} - Returns an <article> element representing the image media.
     */
@@ -98,16 +98,37 @@ class ImageMedia extends MainMedia {
             `
         );
 
-        let imageModal = article.querySelectorAll('.mediaImage');
+        let imageModal = article.querySelectorAll('.mediaImage')
         imageModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id));
-            element.addEventListener('keydown', (e) => {
+            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une vidéo permettant l'ouverture de la modale carroussel.
+            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une vidéo permettant l'ouverture de la modale carroussel.
                 if (e.key === 'Enter') {
-                    openMediasModal(this.id);
+                    openMediasModal(this.id)
                 }
-            });
+            })
         });
+
         return article;
+    }
+
+    /**
+       * Creates a video media element for the modal.
+       * @method [<createMediaModal>]
+       * @returns {HTMLElement} - Returns a <div> element representing the video media in the modal.
+   */
+    createMediaModal() {
+        const article = document.createElement('div')
+        article.setAttribute('id', 'mediaModal_' + this.id)
+        article.setAttribute('class', 'mediaModal')
+        article.insertAdjacentHTML(
+            "beforeend",
+            `
+                <img src="${this.image}" class="mediaPicture" alt="${this.title}" tabindex="0"/>
+                <p>${this.title}</p> 
+            `
+        )
+
+        return (article)
     }
 }
 
@@ -125,7 +146,7 @@ class VideoMedia extends MainMedia {
 
     /**
         * Creates a video media element and adds it to the DOM.
-        * @function [<createMedia>]
+        * @method [<createMedia>]
         * @override
         * @returns {HTMLElement} - Returns an <article> element representing the video media.
     */
@@ -140,14 +161,14 @@ class VideoMedia extends MainMedia {
             `
         );
 
-        let videoModal = article.querySelectorAll('.mediaVideo');
-        videoModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id));
-            element.addEventListener('keydown', (e) => {
+        let imageModal = article.querySelectorAll('.mediaVideo')
+        imageModal.forEach(element => {
+            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une vidéo permettant l'ouverture de la modale carroussel.
+            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une vidéo permettant l'ouverture de la modale carroussel.
                 if (e.key === 'Enter') {
-                    openMediasModal(this.id);
+                    openMediasModal(this.id)
                 }
-            });
+            })
         });
 
         return article;
@@ -155,23 +176,24 @@ class VideoMedia extends MainMedia {
 
     /**
         * Creates a video media element for the modal.
-        * @function [<createMediaModal>]
+        * @method [<createMediaModal>]
         * @returns {HTMLElement} - Returns a <div> element representing the video media in the modal.
     */
     createMediaModal() {
-        const article = document.createElement('div');
-        article.setAttribute('id', 'mediaModal_' + this.id);
-        article.setAttribute('class', 'mediaModal');
+        const article = document.createElement('div')
+        article.setAttribute('id', 'mediaModal_' + this.id)
+        article.setAttribute('class', 'mediaModal')
         article.insertAdjacentHTML(
             "beforeend",
             `
-            <video width="350" height="300" class="video" alt="${this.title}" tabindex="0" controls>
-            <source src="${this.film}" type=video/mp4>
+            <video width="350" height="300" class="video" alt="${this.title}" tabindex="0" controls auto>
+            <source src="${this.video}" type=video/mp4>
             </video>
             <p>${this.title}</p> 
             `
-        );
+        )
 
-        return article;
+        return (article)
     }
+
 }

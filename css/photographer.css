@@ -67,17 +67,17 @@ h2 {
 .label {
     display: block;
     margin-bottom: 8px;
+    font-weight: bold;
 }
 
-/* Conteneur du select */
 .select_container {
     position: relative;
     width: 145px;
 }
 
-/* Bouton dropdown */
+/* dropdown button */
 .btn_drop {
-    background-color: #8b211e;
+    background-color: #901C1C;
     color: white;
     width: 100%;
     padding: 12px 16px;
@@ -95,7 +95,7 @@ h2 {
     transition: transform 0.3s ease;
 }
 
-/* Style pour le menu déroulant */
+
 #dropdown_menu {
     position: absolute;
     width: 100%;
@@ -109,7 +109,7 @@ h2 {
 }
 
 #dropdown_menu_hidden {
-    background-color: #8b211e;
+    background-color: #901C1C;
     color: white;
     list-style: none;
     padding: 0;
@@ -122,7 +122,7 @@ h2 {
     position: relative;
 }
 
-/* Lignes séparatrices pour les options */
+/* lines between options */
 .dropdown_options:after {
     content: '';
     position: absolute;
@@ -133,7 +133,7 @@ h2 {
     background-color: rgb(255, 255, 255);
 }
 
-/* Supprimer la ligne du dernier élément */
+/* remove the last element */
 .dropdown_options:last-child:after {
     display: none;
 }
@@ -195,6 +195,9 @@ h2 {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    color: #901C1C;
+    font-size: larger;
+    margin-top: 10px;
 }
 
 .likes {
@@ -324,4 +327,25 @@ textarea {
 
 form textarea {
     height: 170px;
+}
+
+/* LIGHTBOX 
+.modal-content {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    background-color: rgba(196, 196, 196, 0.4);
+}*/
+
+.mediaModal {
+    display: none;
+}
+
+.mediaModal.active {
+    display: block;
 }

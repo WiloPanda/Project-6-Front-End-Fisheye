@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         displayData(photographer);
         displayMedia(media, photographer)
         sortFilter(media, photographer);
+
     }
 
     init();
@@ -100,6 +101,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let totalLikes = calculateTotalLikes(media);
         document.querySelector(".totalLikes").textContent = totalLikes;
+
+        initMediasModal(media, photographer);
     }
 
 
@@ -155,19 +158,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const dropdownMenu = document.getElementById('dropdown_menu');
 
     let filterAlreadySelected = allFilters.find(filter => filter.textContent.trim() === currentFilter.textContent);
-    console.log(filterAlreadySelected);
     if (filterAlreadySelected) {
         filterAlreadySelected.style.display = 'none';
     }
 
-    // Ouvrir/fermer le menu au clic sur le bouton
+    // Open/close dropdown menu
     dropdownButton.addEventListener("click", function () {
         const isExpanded = dropdownButton.getAttribute("aria-expanded") === "true";
         dropdownButton.setAttribute("aria-expanded", !isExpanded);
         dropdownMenu.style.display = isExpanded ? "none" : "block";
     });
 
-    // Fermer le menu si on clique à côté
+    // Close dropdown menu when clicking outside
     document.addEventListener("click", function (event) {
         if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownButton.setAttribute("aria-expanded", "false");
@@ -175,28 +177,33 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Ajouter l'événement sur les options du menu
     allFilters.forEach(filter => {
         filter.addEventListener('click', () => {
-            // Mettre à jour le texte du bouton avec le texte de l'option sélectionnée
+            // Update the current filter
             currentFilter.textContent = filter.textContent;
 
-            // Masquer l'option précédemment sélectionnée et la réafficher dans la liste
+            // Display the previously selected filter
             if (filterAlreadySelected) {
                 filterAlreadySelected.style.display = 'block';
             }
 
-            // Masquer la nouvelle option sélectionnée
+            // Hide the current filter
             filter.style.display = 'none';
 
-            // Mettre à jour la référence de la dernière option sélectionnée
+            // Update the previously selected filter
             filterAlreadySelected = filter;
 
-            // Fermer le menu après la sélection
+            // Close the dropdown menu after selecting a filter
             dropdownButton.setAttribute("aria-expanded", "false");
             dropdownMenu.style.display = "none";
         });
     });
+
+
+
+
+
+
+
+
 });
-
-
