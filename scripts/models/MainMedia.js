@@ -39,8 +39,8 @@ class MainMedia {
                 `
         <aside>
             <p class="photographer_Likes">
-                <span class="totalLikes">${this.likes}</span>
-                <img class="fas fa-heart" src="assets/icons/Heart.png" aria-hidden="true" alt="heart icon showing total likes count"></span>
+                <span aria-label="total likes count" class="totalLikes">${this.likes}</span>
+                <img class="fas fa-heart" src="assets/icons/Heart.png" aria-label="heart icon to like a media" aria-hidden="true" alt="heart icon"></span>
             </p>
             <span>${this.photographer.price}€ / day</span>
         </aside>
@@ -187,7 +187,7 @@ class VideoMedia extends MainMedia {
             "beforeend",
             `
             <video class="video" alt="${this.title}" tabindex="0" controls auto>
-            <source src="${this.video}" type=video/mp4>
+            <source src="${this.film}" type=video/mp4>
             </video>
             <p>${this.title}</p> 
             `

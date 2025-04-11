@@ -40,6 +40,13 @@ function photographerProfileTemplate(data) {
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
+
+    const firstFocusable = modal.getElementById("firstname");
+    if (firstFocusable) {
+        firstFocusable.focus();
+    }
+
+    document.querySelector("main").setAttribute("aria-hidden", "true");
 }
 
 /**
@@ -48,8 +55,13 @@ function displayModal() {
  */
 function closeModal() {
     const modal = document.getElementById("contact_modal");
-
     modal.style.display = "none";
+
+    document.querySelector("main").removeAttribute("aria-hidden");
+
+    const firstFocusable = document.querySelector(".contact_button");
+    firstFocusable.focus();
+
 }
 
 /**
@@ -68,3 +80,23 @@ function sendForm(event) {
     };
     console.log(objectcontacform);
 }
+
+const modal = document.getElementById("contact_modal");
+const focusables = modal.querySelectorAll('[data-index]');
+const first = focusables[0];
+const last = focusables[focusables.length - 1];
+
+modal.addEventListener("keydown", function (e) {
+    if (e.key === "Tab") {
+        const activeElement = document.activeElement;
+        const isShift = e.shiftKey;
+
+        if (!isShift && activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        } else if (isShift && activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        }
+    }
+});

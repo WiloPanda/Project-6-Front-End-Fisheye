@@ -149,6 +149,26 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector(".photographe_medias").innerHTML = "";
                 displayMedia(mediaOrdonnees, photographer);
             });
+
+            option.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    mediaOrdonnees.sort((a, b) => {
+                        switch (e.target.textContent.trim()) {
+                            case "Popularité":
+                                return b.likes - a.likes;
+                            case "Date":
+                                return new Date(b.date) - new Date(a.date);
+                            case "Titre":
+                                return a.title.localeCompare(b.title);
+                            default:
+                                return 0;
+                        }
+                    });
+                }
+
+                document.querySelector(".photographe_medias").innerHTML = "";
+                displayMedia(mediaOrdonnees, photographer);
+            });
         });
     }
 
@@ -179,31 +199,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
     allFilters.forEach(filter => {
         filter.addEventListener('click', () => {
-            // Update the current filter
-            currentFilter.textContent = filter.textContent;
-
-            // Display the previously selected filter
-            if (filterAlreadySelected) {
-                filterAlreadySelected.style.display = 'block';
-            }
-
-            // Hide the current filter
-            filter.style.display = 'none';
-
-            // Update the previously selected filter
-            filterAlreadySelected = filter;
-
-            // Close the dropdown menu after selecting a filter
-            dropdownButton.setAttribute("aria-expanded", "false");
-            dropdownMenu.style.display = "none";
+            updateFilter(filter);
         });
     });
 
+    // Séparation de la logique de mise à jour de filtre
+    function updateFilter(filter) {
+        // Update the current filter
+        currentFilter.textContent = filter.textContent;
 
+        // Display the previously selected filter
+        if (filterAlreadySelected) {
+            filterAlreadySelected.style.display = 'block';
+        }
 
+        // Hide the current filter
+        filter.style.display = 'none';
 
+        // Update the previously selected filter
+        filterAlreadySelected = filter;
 
+        // Close the dropdown menu after selecting a filter
+        dropdownButton.setAttribute("aria-expanded", "false");
+        dropdownMenu.style.display = "none";
+    }
 
+    // Modification du gestionnaire d'événements keydown
+    allFilters.forEach(filter => {
+        filter.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Empêche le comportement par défaut
+                updateFilter(filter);
+            }
+            // Nous ne traitons plus l'événement Tab du tout, laissant le comportement par défaut se produire
+        });
+    });
+
+    // Pour maintenir le menu ouvert pendant la navigation par Tab
+    dropdownMenu.addEventListener('focusout', (e) => {
+        // Vérifier si le nouvel élément focus est toujours dans le menu
+        if (!dropdownMenu.contains(e.relatedTarget)) {
+            // Si on quitte complètement le menu
+            if (!dropdownMenu.contains(document.activeElement)) {
+                dropdownButton.setAttribute("aria-expanded", "false");
+                dropdownMenu.style.display = "none";
+            }
+
+        }
+    });
 
 
 });

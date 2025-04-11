@@ -4,13 +4,15 @@
   "description": "Project 6",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "http-server",
+    "lint": "eslint . --config ./eslint.config.js"
   },
   "author": "Wilo",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "^9.20.0",
-    "eslint": "^9.20.1",
+    "eslint": "^9.24.0",
     "globals": "^16.0.0"
   }
 }

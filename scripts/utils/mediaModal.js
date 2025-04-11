@@ -11,17 +11,16 @@ function initMediasModal(media, photographer) {
     const modal = document.getElementById("medias_modal");
     modal.style.display = "none";
 
-    // Création du HTML de la modale.
     const modalHtml = `
     <div class="modal_childrens">
         <div class="modal-content">
             <div id="left-side">
-                <span class="previous-button"><img src="assets/icons/left_arrow.png" alt="Previous media" aria-label="Previous media"></span>
+                <button class="previous-button" data-index="0"><img src="assets/icons/left_arrow.png" alt="Previous media" aria-label="Previous media"></button>
             </div>
             <div id="carousel"></div>
             <div id="right-side">
-                <span class="close-button"><img src="assets/icons/close.svg" alt="Close modal" aria-label="Close dialog"></span>
-                <span class="next-button"><img src="assets/icons/right_arrow.png" alt="Next media" aria-label="Next media"></span>
+                <button class="close-button" data-index="2"><img src="assets/icons/close_red.png" alt="Close modal" aria-label="Close dialog"></button>
+                <button class="next-button" data-index="1"><img src="assets/icons/right_arrow.png" alt="Next media" aria-label="Next media"></button>
             </div>
         </div>
     </div>
@@ -50,9 +49,33 @@ function initMediasModal(media, photographer) {
             carousel.appendChild(article);
         }
     }
+
+    const trapFocus = function (e) {
+        if (e.key === "Tab") {
+            const focusablesLightbox = modal.querySelectorAll('button, [tabindex]:not([tabindex="-1"])');
+            const firstFocusable = focusablesLightbox[0];
+            const lastFocusable = focusablesLightbox[focusablesLightbox.length - 1];
+
+            const isShift = e.shiftKey;
+            const activeElement = document.activeElement;
+
+            if (!isShift && activeElement === lastFocusable) {
+                e.preventDefault();
+                firstFocusable.focus();
+            } else if (isShift && activeElement === firstFocusable) {
+                e.preventDefault();
+                lastFocusable.focus();
+            }
+        }
+    };
+
+    // Ajout de l'écouteur d'événement pour piéger le focus
+    modal.addEventListener("keydown", trapFocus);
+
     // Ajout d'un évènement au clique sur le bouton close, permettant d'ajouter du style à la modal pour ne plus l'afficher.
     closeButton.addEventListener("click", function () {
         modal.style.display = "none";
+        document.querySelector("main").removeAttribute("aria-hidden");
     });
 
     // Ajout d'un évènement au clique sur sur le bouton 'previous', permettant de retirer au média affiché la classe 'active', et d'attribuer au média précédent la classe 'active'.
@@ -108,4 +131,9 @@ function openMediasModal(id) {
         m.classList.remove('active') // On vient enlever la classe 'active' à tous les médias de la modale.
     })
     img.classList.add('active') // On vient ajouter la classe 'active' au média choisi pour pouvoir ouvrir la modale directement sur ce média.
+
+    const previousButton = modal.querySelector('.previous-button');
+    previousButton.focus();
+
+    document.querySelector("main").setAttribute("aria-hidden", "true");
 }
