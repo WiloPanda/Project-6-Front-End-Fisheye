@@ -81,6 +81,7 @@ function sendForm(event) {
     console.log(objectcontacform);
 }
 
+//Management of the accessibility of the modal
 const modal = document.getElementById("contact_modal");
 const focusables = modal.querySelectorAll('[data-index]');
 const first = focusables[0];

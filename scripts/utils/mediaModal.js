@@ -1,10 +1,10 @@
-/* ---- Ce fichier comporte les éléments nécessaire à l'initialisation de la modale de carroussel et à son ouverture. ---- */
+/* ---- This file contains the necessary elements to initialize the carousel modal and to open it. ---- */
 
 /**
- * Initialisation de la fonction initMediasModal avec en paramètre les différentes médias se trouvant sur la page d'un photographe.
+ * Initialization of the initMediasModal function with the different media on a photographer's page as parameter.
  * @function [<initMediasModal>]
- * @param {Array} medias - Les différents médias à afficher dans la modale. 
- * @returns {HTMLElement} Retourne l'élément HTML de la modale.
+ * @param {Array} medias - The different media to display in the modal.
+ * @returns {HTMLElement} Returns the HTML element of the modal.
  */
 function initMediasModal(media, photographer) {
 
@@ -28,13 +28,13 @@ function initMediasModal(media, photographer) {
 
     modal.innerHTML = modalHtml;
 
-    // Création des différents selecteurs pour viser la modale et ses différents boutons, close, previous et next.
+    // Creation of different selectors to target the modal and its various buttons: close, previous and next.
     let closeButton = document.querySelector('.close-button');
     let previousButton = document.querySelector('.previous-button');
     let nextButton = document.querySelector('.next-button');
     let carousel = document.getElementById("carousel");
 
-    // Création des médias dans la modale du carroussel en utilisant les deux classes de médias disponibles.
+    // Creation of media in the carousel modal using the two available media classes.
     for (let i = 0; i < media.length; i++) {
         if (media[i].image) {
             let imageMedia = new ImageMedia(media[i], photographer)
@@ -69,16 +69,16 @@ function initMediasModal(media, photographer) {
         }
     };
 
-    // Ajout de l'écouteur d'événement pour piéger le focus
+    // Adding event listener to trap focus
     modal.addEventListener("keydown", trapFocus);
 
-    // Ajout d'un évènement au clique sur le bouton close, permettant d'ajouter du style à la modal pour ne plus l'afficher.
+    // Adding a click event on the close button to add style to the modal to hide it.
     closeButton.addEventListener("click", function () {
         modal.style.display = "none";
         document.querySelector("main").removeAttribute("aria-hidden");
     });
 
-    // Ajout d'un évènement au clique sur sur le bouton 'previous', permettant de retirer au média affiché la classe 'active', et d'attribuer au média précédent la classe 'active'.
+    // Adding a click event on the 'previous' button to remove the 'active' class from the displayed media and assign the 'active' class to the previous media.
     previousButton.addEventListener("click", function () {
         let m = modal.querySelector('.mediaModal.active')
         m.classList.remove('active')
@@ -90,7 +90,7 @@ function initMediasModal(media, photographer) {
         }
     });
 
-    // Ajout d'un évènement au clique sur sur le bouton 'previous', permettant de retirer au média affiché la classe 'active', et d'attribuer au média suivant la classe 'active'.
+    // Adding a click event on the 'next' button to remove the 'active' class from the displayed media and assign the 'active' class to the next media.
     nextButton.addEventListener("click", function () {
         let m = modal.querySelector('.mediaModal.active')
         m.classList.remove('active')
@@ -102,7 +102,7 @@ function initMediasModal(media, photographer) {
         }
     });
 
-    // Ajout d'un évènement sur la page qui permets d'utiliser les évènements au clique grâce au clavier.
+    // Adding an event listener to the page that allows click events to be triggered using the keyboard.
     window.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") {
             previousButton.click();
@@ -117,20 +117,20 @@ function initMediasModal(media, photographer) {
 }
 
 /**
- * Initialisation d'une fonction permettant de display block la modale de carroussel qui est initialement display none.
+ * Initialization of a function to display the carousel modal which is initially display none.
  * @function [<openMediasModal>]
- * @param {Number} id - ID unique du média selectionné, permettant son affichage en premier. 
+ * @param {Number} id - Unique ID of the selected media, allowing it to be displayed first.
  */
 function openMediasModal(id) {
 
     const modal = document.getElementById("medias_modal");
-    const img = document.getElementById('mediaModal_' + id); // On récupère le média qui comporte l'id 'mediaModal_' + l'ID unique du média choisi.
+    const img = document.getElementById('mediaModal_' + id); // We get the media that has the id 'mediaModal_' + the unique ID of the chosen media.
 
-    modal.style.display = 'block' // On display block la modale.
+    modal.style.display = 'block' // We display the modal.
     modal.querySelectorAll('.mediaModal').forEach(m => {
-        m.classList.remove('active') // On vient enlever la classe 'active' à tous les médias de la modale.
+        m.classList.remove('active') // We remove the 'active' class from all media in the modal.
     })
-    img.classList.add('active') // On vient ajouter la classe 'active' au média choisi pour pouvoir ouvrir la modale directement sur ce média.
+    img.classList.add('active') // We add the 'active' class to the chosen media to be able to open the modal directly on this media.
 
     const previousButton = modal.querySelector('.previous-button');
     previousButton.focus();

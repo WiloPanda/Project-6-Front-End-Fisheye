@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * Display the Images and Videos of the photographer in the section photographe_medias
      * Call the fonction calculateTotalLikes.
      * @function [<displayMedia>]
-     * @param {object} media - The data of the medias of the photographer.
+     * @param {Array} media - The data of the medias of the photographer.
      * @param {object} photographer - The data of the photographer.
      */
     async function displayMedia(media, photographer) {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * Calculate the total of likes of the medias.
      * @function [<calculateTotalLikes>]
-     * @param {object} media - The data of the medias of the photographer.
+     * @param {Array} media - The data of the medias of the photographer.
      * @returns {string} The total of likes of the medias.
      */
     function calculateTotalLikes(media) {
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /**
      * Sort the medias by popularity, date or title.
      * @function [<sortFilter>]
-     * @param {object} media - The data of the medias of the photographer.
+     * @param {array} media - The data of the medias of the photographer.
      * @param {object} photographer - The data of the photographer.
      * @returns {object} The medias sorted
      */
@@ -172,6 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+
+    //Management of the dropdown menu for the filter selection
     const currentFilter = document.getElementById('current_filter');
     const allFilters = Array.from(document.querySelectorAll('.dropdown_options'));
     const dropdownButton = document.getElementById('dropdown_button');
@@ -182,14 +184,14 @@ document.addEventListener("DOMContentLoaded", function () {
         filterAlreadySelected.style.display = 'none';
     }
 
-    // Open/close dropdown menu
+    //Open/close dropdown menu
     dropdownButton.addEventListener("click", function () {
         const isExpanded = dropdownButton.getAttribute("aria-expanded") === "true";
         dropdownButton.setAttribute("aria-expanded", !isExpanded);
         dropdownMenu.style.display = isExpanded ? "none" : "block";
     });
 
-    // Close dropdown menu when clicking outside
+    //Close dropdown menu when clicking outside
     document.addEventListener("click", function (event) {
         if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
             dropdownButton.setAttribute("aria-expanded", "false");
@@ -197,49 +199,53 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    //Event listener for filter selection
     allFilters.forEach(filter => {
         filter.addEventListener('click', () => {
             updateFilter(filter);
         });
     });
 
-    // Séparation de la logique de mise à jour de filtre
+    /**
+     * Update the filter displayed in the dropdown menu.
+     * @function [<updateFilter>] 
+     * @param {object} filter - The filter selected by the user.
+     */
     function updateFilter(filter) {
-        // Update the current filter
+        //Update the current filter
         currentFilter.textContent = filter.textContent;
 
-        // Display the previously selected filter
+        //Display the previously selected filter
         if (filterAlreadySelected) {
             filterAlreadySelected.style.display = 'block';
         }
 
-        // Hide the current filter
+        //Hide the current filter
         filter.style.display = 'none';
 
-        // Update the previously selected filter
+        //Update the previously selected filter
         filterAlreadySelected = filter;
 
-        // Close the dropdown menu after selecting a filter
+        //Close the dropdown menu after selecting a filter
         dropdownButton.setAttribute("aria-expanded", "false");
         dropdownMenu.style.display = "none";
     }
 
-    // Modification du gestionnaire d'événements keydown
+    //Changing of the filter with the keyboard
     allFilters.forEach(filter => {
         filter.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                e.preventDefault(); // Empêche le comportement par défaut
+                e.preventDefault(); //Prevent default action of Enter key
                 updateFilter(filter);
             }
-            // Nous ne traitons plus l'événement Tab du tout, laissant le comportement par défaut se produire
         });
     });
 
-    // Pour maintenir le menu ouvert pendant la navigation par Tab
+    //Close the dropdown menu when focus is lost
     dropdownMenu.addEventListener('focusout', (e) => {
-        // Vérifier si le nouvel élément focus est toujours dans le menu
+        // Check if the focus is lost to an element outside the dropdown menu
         if (!dropdownMenu.contains(e.relatedTarget)) {
-            // Si on quitte complètement le menu
+            // Close the dropdown menu
             if (!dropdownMenu.contains(document.activeElement)) {
                 dropdownButton.setAttribute("aria-expanded", "false");
                 dropdownMenu.style.display = "none";
