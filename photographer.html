@@ -15,7 +15,7 @@
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" alt="fisheye logo" />
+    <img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="fisheye logo" />
   </header>
 
   <main id="main">
@@ -29,14 +29,15 @@
           aria-expanded="false" aria-controls="dropdown_menu" aria-label="Sort by">
           <span id="current_filter">Popularité</span>
           <img src="/assets/icons/dropdown.png" alt="icône flèche permettant de déplier le filtre dropdown"
-            tabindex="0" />
+            aria-label="Sort by" tabindex="0" />
         </button>
         <div id="dropdown_menu">
           <ul id="dropdown_menu_hidden">
-            <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" value="Popularité">Popularité
+            <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" aria-label="Popularité"
+              value="Popularité">Popularité
             </li>
-            <li class="dropdown_options" tabindex="0" role="option" value="Date">Date</li>
-            <li class="dropdown_options" tabindex="0" role="option" value="Titre">Titre</li>
+            <li class="dropdown_options" tabindex="0" role="option" aria-label="Date" value="Date">Date</li>
+            <li class="dropdown_options" tabindex="0" role="option" aria-label="Titre" value="Titre">Titre</li>
           </ul>
         </div>
       </div>

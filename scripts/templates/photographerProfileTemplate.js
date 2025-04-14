@@ -41,10 +41,8 @@ function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 
-    const firstFocusable = modal.getElementById("firstname");
-    if (firstFocusable) {
-        firstFocusable.focus();
-    }
+    const firstFocusable = document.getElementById("firstname");
+    firstFocusable.focus();
 
     document.querySelector("main").setAttribute("aria-hidden", "true");
 }
