@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
   <!-- Styles -->
-  <link href="css/reset.css" rel="stylesheet" type="text/css" />
-  <link href="css/photographer.css" rel="stylesheet" type="text/css" />
+  <link href="css/reset.css" rel="stylesheet" type="text/css">
+  <link href="css/photographer.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
 
 
@@ -15,53 +15,52 @@
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="fisheye logo" />
+    <img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="fisheye logo">
   </header>
 
   <main id="main">
-    <section class="photographe_header">
-    </section>
+    <div class="photographe_header">
+    </div>
 
     <div class="filter_section">
-      <label class="label" for="select">Trier par</label>
+      <label class="label">Trier par</label>
       <div class="select_container">
-        <button id="dropdown_button" class="btn_drop" type="button" role="button" aria-haspopup="listbox"
-          aria-expanded="false" aria-controls="dropdown_menu" aria-label="Sort by">
+        <button id="dropdown_button" class="btn_drop" type="button" aria-haspopup="listbox" aria-expanded="false"
+          aria-controls="dropdown_menu" aria-label="Sort by">
           <span id="current_filter">Popularité</span>
           <img src="/assets/icons/dropdown.png" alt="icône flèche permettant de déplier le filtre dropdown"
-            aria-label="Sort by" tabindex="0" />
+            aria-label="Sort by">
         </button>
         <div id="dropdown_menu">
-          <ul id="dropdown_menu_hidden">
-            <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" aria-label="Popularité"
-              value="Popularité">Popularité
+          <ul id="dropdown_menu_hidden" role="listbox" aria-label="Sort by">
+            <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" aria-label="Popularité">
+              Popularité
             </li>
-            <li class="dropdown_options" tabindex="0" role="option" aria-label="Date" value="Date">Date</li>
-            <li class="dropdown_options" tabindex="0" role="option" aria-label="Titre" value="Titre">Titre</li>
+            <li class="dropdown_options" tabindex="0" role="option" aria-label="Date">Date</li>
+            <li class="dropdown_options" tabindex="0" role="option" aria-label="Titre">Titre</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <section class="photographe_medias">
-    </section>
+    <div class="photographe_medias">
+    </div>
   </main>
   <div id="contact_modal">
     <div class="modal">
       <header>
         <h1 class="modal_title">Contactez-moi</h1>
         <button class="close_modal" data-index="5" aria-label="Close dialog" onclick="closeModal()"><img
-            src="assets/icons/close.svg" alt="Close modal" /></button>
+            src="assets/icons/close.svg" alt="Close modal"></button>
       </header>
       <form onsubmit="sendForm(event)">
         <div>
           <label for="firstname">Prenom</label>
-          <input type="text" id="firstname" name="firstname" aria-label="Write your first name" data-index="0"
-            required />
+          <input type="text" id="firstname" name="firstname" aria-label="Write your first name" data-index="0" required>
           <label for="lastname">Nom</label>
-          <input type="text" id="lastname" name="lastname" aria-label="Write your last name" data-index="1" required />
+          <input type="text" id="lastname" name="lastname" aria-label="Write your last name" data-index="1" required>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" aria-label="Write your email" data-index="2" required />
+          <input type="email" id="email" name="email" aria-label="Write your email" data-index="2" required>
           <label for="message">Message</label>
           <textarea id="message" name="message" aria-label="Write your message" cols="70" rows="10" data-index="3"
             required></textarea>
@@ -73,12 +72,11 @@
   </div>
   <div id="medias_modal">
   </div>
+  <!-- Scripts -->
+  <script src="/scripts/pages/photographer.js" defer></script>
+  <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
+  <script src="/scripts/models/MainMedia.js" defer></script>
+  <script src="/scripts/utils/mediaModal.js" defer></script>
 </body>
-
-<!-- Scripts -->
-<script src="/scripts/pages/photographer.js" defer></script>
-<script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
-<script src="/scripts/models/MainMedia.js" defer></script>
-<script src="/scripts/utils/mediaModal.js" defer></script>
 
 </html>
