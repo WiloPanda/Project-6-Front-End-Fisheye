@@ -92,6 +92,7 @@ h2 {
 
 .btn_drop img {
     width: 12px;
+    rotate: 180deg;
     transition: transform 0.3s ease;
 }
 

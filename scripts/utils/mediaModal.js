@@ -15,12 +15,12 @@ function initMediasModal(media, photographer) {
     <div class="modal_childrens">
         <div class="modal-content">
             <div id="left-side">
-                <button class="previous-button" data-index="0"><img src="assets/icons/left_arrow.png" alt="Previous media" aria-label="Previous media"></button>
+                <button class="previous-button" data-index="0"><img src="assets/icons/left_arrow.png" alt="Média précédent" aria-label="Média précédent"></button>
             </div>
             <div id="carousel"></div>
             <div id="right-side">
-                <button class="close-button" data-index="2"><img src="assets/icons/close_red.png" alt="Close modal" aria-label="Close dialog"></button>
-                <button class="next-button" data-index="1"><img src="assets/icons/right_arrow.png" alt="Next media" aria-label="Next media"></button>
+                <button class="close-button" data-index="2"><img src="assets/icons/close_red.png" alt="Fermer la fenêtre du média" aria-label="Fermer la fenêtre du média"></button>
+                <button class="next-button" data-index="1"><img src="assets/icons/right_arrow.png" alt="Média suivant" aria-label="Média suivant"></button>
             </div>
         </div>
     </div>

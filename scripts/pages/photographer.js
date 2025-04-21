@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
      */
     async function displayData(photographer) {
         const photographersSection = document.querySelector(".photographe_header");
-        const photographerModel = photographerProfileTemplate(photographer);
+        const photographerModel = photographersTemplate(photographer);
         const userCardDOM = photographerModel.getUserCardDOM();
         photographersSection.appendChild(userCardDOM);
     }
@@ -168,6 +168,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 document.querySelector(".photographe_medias").innerHTML = "";
                 displayMedia(mediaOrdonnees, photographer);
+
+                // Attendre que les médias soient pleinement chargés
+                setTimeout(() => {
+                    // Optionnellement, forcer une mise à jour d'accessibilité
+                    const firstMedia = document.querySelector('.mediaVideo, .mediaImage');
+                    if (firstMedia) {
+                        // Forcer un rafraîchissement d'accessibilité
+                        firstMedia.setAttribute('aria-label', firstMedia.getAttribute('aria-label'));
+                    }
+                }, 100);
             });
         });
     }

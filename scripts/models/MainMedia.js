@@ -28,7 +28,8 @@ class MainMedia {
             `
                 <div class="descriptionPicture">
                     <p tabindex="0">${this.title}</p>
-                    <div class="likes"><p tabindex="0">${this.likes}</p><img tabindex="0" class="heart" src="assets/icons/Heart.png" alt="heart icon to like a media"/></div>
+                    <div class="likes"><p tabindex="0" aria-label="il y a ${this.likes} j'aime sur ce média">${this.likes}</p><img tabindex="0" class="heart" src="assets/icons/Heart.png" 
+                    aria-label="îcone de coeur pour aimer un média" alt="Îcone de coeur pour aimer un média"/></div>
                 </div>  
             `
         );
@@ -39,10 +40,10 @@ class MainMedia {
                 `
         <aside>
             <p class="photographer_Likes">
-                <span aria-label="total likes count" class="totalLikes">${this.likes}</span>
-                <img class="fas fa-heart" src="assets/icons/Heart.png" aria-label="heart icon to like a media" aria-hidden="true" alt="heart icon"></span>
+                <span aria-label="nombre total de "j'aime" sur les médias de ${this.photographer.name}" tabindex="0" class="totalLikes">${this.likes}</span>
+                <img class="fas fa-heart" src="assets/icons/Heart.png" aria-label="Îcone de coeur" tabindex="0" aria-hidden="true" alt="îcone de coeur"></span>
             </p>
-            <span>${this.photographer.price}€ / day</span>
+            <span aria-label="le coût de la prestation de ${this.photographer.name} est de ${this.photographer.price}€ par jour" tabindex="0">${this.photographer.price}€ / day</span>
         </aside>
         `
             );
@@ -69,131 +70,4 @@ class MainMedia {
         });
         return article;
     }
-}
-
-class ImageMedia extends MainMedia {
-    /** 
-        * Constructor for creating a new image media.
-        * @constructor
-        * @param {Object} media - Data of the media.
-        * @param {Object} photographer - Data of the photographer.
-    */
-    constructor(media, photographer) {
-        super(media, photographer);
-        this.image = `assets/photos/Sample Photos/${photographer.name}/${media.image}`;
-    }
-
-    /**
-        * Creates an image media element and adds it to the DOM.
-        * @method [<createMedia>]
-        * @override
-        * @returns {HTMLElement} - Returns an <article> element representing the image media.
-    */
-    createMedia() {
-        const article = super.createMedia();
-        article.insertAdjacentHTML(
-            "afterbegin",
-            `
-            <img src="${this.image}" alt="${this.title}" class="mediaImage" tabindex="0"/>
-            `
-        );
-
-        let imageModal = article.querySelectorAll('.mediaImage')
-        imageModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une vidéo permettant l'ouverture de la modale carroussel.
-            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une vidéo permettant l'ouverture de la modale carroussel.
-                if (e.key === 'Enter') {
-                    openMediasModal(this.id)
-                }
-            })
-        });
-
-        return article;
-    }
-
-    /**
-       * Creates a video media element for the modal.
-       * @method [<createMediaModal>]
-       * @returns {HTMLElement} - Returns a <div> element representing the video media in the modal.
-   */
-    createMediaModal() {
-        const article = document.createElement('div')
-        article.setAttribute('id', 'mediaModal_' + this.id)
-        article.setAttribute('class', 'mediaModal')
-        article.insertAdjacentHTML(
-            "beforeend",
-            `
-                <img src="${this.image}" class="mediaPicture" alt="${this.title}" tabindex="0"/>
-                <p>${this.title}</p> 
-            `
-        )
-
-        return (article)
-    }
-}
-
-class VideoMedia extends MainMedia {
-    /** 
-        * Constructor for creating a new video media.
-        * @constructor
-        * @param {Object} media - Data of the media.
-        * @param {Object} photographer - Data of the photographer.
-    */
-    constructor(media, photographer) {
-        super(media, photographer);
-        this.film = `assets/photos/Sample Photos/${photographer.name}/${media.video}`;
-    }
-
-    /**
-        * Creates a video media element and adds it to the DOM.
-        * @method [<createMedia>]
-        * @override
-        * @returns {HTMLElement} - Returns an <article> element representing the video media.
-    */
-    createMedia() {
-        const article = super.createMedia();
-        article.insertAdjacentHTML(
-            "afterbegin",
-            `
-            <video alt="${this.title}" class="mediaVideo" tabindex="0">
-            <source src="${this.film}" type=video/mp4>
-            </video>
-            `
-        );
-
-        let imageModal = article.querySelectorAll('.mediaVideo')
-        imageModal.forEach(element => {
-            element.addEventListener('click', () => openMediasModal(this.id)) // Ajout d'un évènement au clique d'une vidéo permettant l'ouverture de la modale carroussel.
-            element.addEventListener('keydown', (e) => { // Ajout d'un évènement à l'appuie du la touche "entrée" d'une vidéo permettant l'ouverture de la modale carroussel.
-                if (e.key === 'Enter') {
-                    openMediasModal(this.id)
-                }
-            })
-        });
-
-        return article;
-    }
-
-    /**
-        * Creates a video media element for the modal.
-        * @method [<createMediaModal>]
-        * @returns {HTMLElement} - Returns a <div> element representing the video media in the modal.
-    */
-    createMediaModal() {
-        const article = document.createElement('div')
-        article.setAttribute('id', 'mediaModal_' + this.id)
-        article.setAttribute('class', 'mediaModal')
-        article.insertAdjacentHTML(
-            "beforeend",
-            `
-            <video class="video" alt="${this.title}" tabindex="0" controls auto>
-            <source src="${this.film}" type=video/mp4>
-            </video>
-            <p>${this.title}</p> 
-            `
-        )
-
-        return (article)
-    }
-
 }

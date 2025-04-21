@@ -15,7 +15,8 @@
 
 <body>
   <header>
-    <img src="assets/images/logo.png" class="logo" alt="fisheye logo" aria-label="fisheye logo">
+    <a href="index.html" aria-label="Retour à la page d'accueil"><img src="assets/images/logo.png" class="logo"
+        alt="fisheye logo" aria-label="fisheye logo"></a>
   </header>
 
   <main id="main">
@@ -26,13 +27,13 @@
       <label class="label">Trier par</label>
       <div class="select_container">
         <button id="dropdown_button" class="btn_drop" type="button" aria-haspopup="listbox" aria-expanded="false"
-          aria-controls="dropdown_menu" aria-label="Sort by">
+          aria-controls="dropdown_menu" aria-label="Trier par">
           <span id="current_filter">Popularité</span>
           <img src="/assets/icons/dropdown.png" alt="icône flèche permettant de déplier le filtre dropdown"
-            aria-label="Sort by">
+            aria-label="Trier par">
         </button>
         <div id="dropdown_menu">
-          <ul id="dropdown_menu_hidden" role="listbox" aria-label="Sort by">
+          <ul id="dropdown_menu_hidden" role="listbox" aria-label="Trier par">
             <li class="dropdown_options" tabindex="0" role="option" aria-selected="true" aria-label="Popularité">
               Popularité
             </li>
@@ -50,22 +51,23 @@
     <div class="modal">
       <header>
         <h1 class="modal_title">Contactez-moi</h1>
-        <button class="close_modal" data-index="5" aria-label="Close dialog" onclick="closeModal()"><img
-            src="assets/icons/close.svg" alt="Close modal"></button>
+        <button class="close_modal" data-index="5" aria-label="Fermer le formulaire de contact"
+          onclick="closeModal()"><img src="assets/icons/close.svg" alt="Fermer le formulaire"></button>
       </header>
       <form onsubmit="sendForm(event)">
         <div>
           <label for="firstname">Prenom</label>
-          <input type="text" id="firstname" name="firstname" aria-label="Write your first name" data-index="0" required>
+          <input type="text" id="firstname" name="firstname" aria-label="Écrivez votre prénom" data-index="0" required>
           <label for="lastname">Nom</label>
-          <input type="text" id="lastname" name="lastname" aria-label="Write your last name" data-index="1" required>
+          <input type="text" id="lastname" name="lastname" aria-label="Écrivez votre nom de famille" data-index="1"
+            required>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" aria-label="Write your email" data-index="2" required>
+          <input type="email" id="email" name="email" aria-label="Écrivez votre adresse mail" data-index="2" required>
           <label for="message">Message</label>
-          <textarea id="message" name="message" aria-label="Write your message" cols="70" rows="10" data-index="3"
+          <textarea id="message" name="message" aria-label="Écrivez votre message" cols="70" rows="10" data-index="3"
             required></textarea>
         </div>
-        <button type="submit" class="contact_button" aria-label="Send form" data-index="4"
+        <button type="submit" class="contact_button" aria-label="Envoyer le formulaire" data-index="4"
           onclick="sendForm(event)">Envoyer</button>
       </form>
     </div>
@@ -73,10 +75,13 @@
   <div id="medias_modal">
   </div>
   <!-- Scripts -->
-  <script src="/scripts/pages/photographer.js" defer></script>
-  <script src="/scripts/templates/photographerProfileTemplate.js" defer></script>
-  <script src="/scripts/models/MainMedia.js" defer></script>
-  <script src="/scripts/utils/mediaModal.js" defer></script>
+  <script src="/scripts/pages/photographer.js"></script>
+  <script src="/scripts/utils/contactForm.js"></script>
+  <script src="/scripts/templates/photographersTemplate.js"></script>
+  <script src="/scripts/models/MainMedia.js"></script>
+  <script src="/scripts/models/ImageMedia.js"></script>
+  <script src="/scripts/models/VideoMedia.js"></script>
+  <script src="/scripts/utils/mediaModal.js"></script>
 </body>
 
 </html>
